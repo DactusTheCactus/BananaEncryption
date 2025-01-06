@@ -1,38 +1,126 @@
-### 🦍 **Ape Tribe’s Guide to the Legendary ApeBananaEncryptor** 🍌
+### **ApeBananaEncryptor: Guida Pratica**
 
 ---
 
-**OOOH OOOOH! BANANA ENCRYPTION FOR BIG BRAIN APES ONLY!** 🧠🦍
-
-Welcome, mighty apes of the internet jungle! Today, King Kong himself has blessed us with the secrets of the **ApeBananaEncryptor**, the ultimate weapon to protect your shiny bananas from sneaky monkeys! 🦍🍌 This isn’t just code—it’s a declaration of ape superiority! Let’s peel this banana and see what’s inside! 🍌🔧
-
----
-
-### 🛠️ **ApeTools We Borrowed**
-
-- **`rand::{Rng, SeedableRng}`** 🌀
-  - Makes random banana magic happen.
-  - `Rng`: Throws dice for apes!
-  - `SeedableRng`: Helps apes remember how they threw the dice. Smart ape stuff.
-
-- **`rand_chacha::ChaCha20Rng`** 🎲
-  - Fancy ape randomness tool. Not always used here but added for ape flex. 🦍💪
-
-- **`base64::{engine::general_purpose, Engine}`** 📜
-  - Turns boring bytes into tasty, readable banana mush. Safe for ape eyes. 👀🍌
+#### **Introduzione**
+L'**ApeBananaEncryptor** è una semplice libreria Rust progettata per crittografare e decrittografare messaggi. Nonostante il tema ludico e ironico, fornisce un esempio di come implementare algoritmi di trasformazione di dati usando Rust. **Nota importante:** Questa libreria non è destinata a garantire sicurezza reale, ma solo a scopi educativi e ludici.
 
 ---
 
-### 🍌 **What’s the Deal with ApeBananaEncryptor?**
+### **Funzionalità**
 
-It’s a super-ape tool for:
-1. Mangling your precious banana messages. 🍌➡️🦍➡️🤔
-2. Spitting out gibberish filled with emojis and ape words.
-3. Reversing the magic (if you have the **ape seed**) to get your bananas back. 🦍🍌➡️🔑➡️📜
+1. **Crittografia dei messaggi:**
+   - Trasforma i messaggi leggibili in stringhe crittografate non comprensibili.
+   - Aggiunge "rumore" al messaggio per renderlo apparentemente casuale.
+
+2. **Decrittografia dei messaggi:**
+   - Ripristina i messaggi originali se si dispone della chiave corretta.
 
 ---
 
-### 🏗️ **The Blueprint: ApeBananaEncryptor**
+### **Utilizzo**
+
+#### **Costruzione dell'oggetto Encryptor**
+```rust
+let seed = "chiave_segreta";
+let encryptor = ApeBananaEncryptor::new(seed);
+```
+
+#### **Crittografia**
+```rust
+let messaggio = "ProteggiIlMessaggio";
+let messaggio_crittografato = encryptor.encrypt(messaggio);
+println!("Messaggio crittografato: {}", messaggio_crittografato);
+```
+
+#### **Decrittografia**
+```rust
+let messaggio_originale = encryptor.decrypt(&messaggio_crittografato);
+println!("Messaggio decrittografato: {}", messaggio_originale);
+```
+
+---
+
+### **Dettagli Tecnici**
+
+#### **Struttura Principale**
+```rust
+pub struct ApeBananaEncryptor {
+    seed: String, // Chiave segreta per la crittografia
+}
+```
+
+#### **Algoritmo**
+1. Aggiunta di prefissi e suffissi per delimitare il messaggio.
+2. Manipolazione di byte attraverso:
+   - Rotazione basata sull'indice del byte.
+   - Offset casuale generato da un RNG basato su un seed.
+3. Aggiunta di byte casuali per mascherare il messaggio.
+4. Codifica finale in base64 per la rappresentazione leggibile.
+
+#### **Decodifica**
+- Rimozione di byte casuali.
+- Decodifica base64.
+- Ripristino del messaggio originale invertendo le operazioni di manipolazione.
+
+---
+
+### **Sicurezza**
+**Nota importante:** Questo schema **non è sicuro** per l'uso in produzione. È un esempio didattico di manipolazione dei dati. 😊
+
+---
+
+### **Esempio Completo**
+```rust
+fn main() {
+    let seed = "chiave_segreta";
+    let encryptor = ApeBananaEncryptor::new(seed);
+
+    let messaggio = "ProteggiIlMessaggio";
+    println!("Messaggio originale: {}", messaggio);
+
+    let messaggio_crittografato = encryptor.encrypt(messaggio);
+    println!("Messaggio crittografato: {}", messaggio_crittografato);
+
+    let messaggio_decrittografato = encryptor.decrypt(&messaggio_crittografato);
+    println!("Messaggio decrittografato: {}", messaggio_decrittografato);
+}
+```
+### 🦍 **Guida della Tribù delle Scimmie al Leggendario ApeBananaEncryptor** 🍌
+
+---
+
+**OOOH OOOOH! CRITTOGRAFIA BANANA SOLO PER SCIMMIE DAL CERVELLONE!** 🧠🦍
+
+Benvenuti, possenti scimmie della giungla di internet! Oggi, King Kong in persona ci ha benedetti con i segreti del **ApeBananaEncryptor**, l'arma definitiva per proteggere le vostre splendenti banane dai scimmioni curiosi! 🦍🍌 Questo non è solo codice—è una dichiarazione di superiorità scimmiesca! Sbucciamo questa banana e vediamo cosa nasconde! 🍌🔧
+
+---
+
+### 🛠️ **Strumenti Scimmieschi Presi in Prestito**
+
+- **`rand::{Rng, SeedableRng}`** 🌀  
+  - Fa accadere la magia delle banane casuali.  
+  - `Rng`: Tira i dadi per le scimmie!  
+  - `SeedableRng`: Aiuta le scimmie a ricordare come hanno tirato i dadi. Cose da scimmie intelligenti.
+
+- **`rand_chacha::ChaCha20Rng`** 🎲  
+  - Uno strumento di casualità avanzato da scimmia. Non sempre usato qui, ma incluso per vantarsi. 🦍💪
+
+- **`base64::{engine::general_purpose, Engine}`** 📜  
+  - Trasforma i noiosi byte in una purea di banana leggibile e gustosa. Sicura per occhi scimmieschi. 👀🍌
+
+---
+
+### 🍌 **Che Cos’è ApeBananaEncryptor?**
+
+È uno strumento super-scimmia per:  
+1. Sminuzzare i vostri preziosi messaggi-banana. 🍌➡️🦍➡️🤔  
+2. Restituire un miscuglio di emoji e frasi da scimmia.  
+3. Revertire la magia (se avete il **seme scimmiesco**) per riavere le vostre banane. 🦍🍌➡️🔑➡️📜
+
+---
+
+### 🏗️ **Il Progetto: ApeBananaEncryptor**
 
 ```rust
 pub struct ApeBananaEncryptor {
@@ -40,96 +128,71 @@ pub struct ApeBananaEncryptor {
 }
 ```
 
-- **`seed`**: The sacred banana password. Protect it like a hoard of shiny bananas. DO NOT SHARE, EVEN WITH OTHER APES! 🛡️🍌
+- **`seed`**: La sacra password banana. Proteggila come un tesoro di banane splendenti. NON CONDIVIDERLA, NEMMENO CON ALTRE SCIMMIE! 🛡️🍌
 
 ---
 
-### 🦍 **Big Ape Magic Explained**
+### 🦍 **La Magia Spiegata alle Scimmie**
 
-#### **1. `new()` - Build the Banana Protector**
+#### **1. `new()` - Costruisci il Protettore delle Banane**
 
-**Translation for Apes:**
-- Ape king calls this to build a banana-protecting machine.
-- Feed it your special **ape seed**, and it’s ready to guard your fruity treasures.
+**Traduzione per Scimmie:**  
+- Il re delle scimmie chiama questa funzione per costruire una macchina protettrice di banane.  
+- Dagli il tuo speciale **seme scimmiesco**, ed è pronta per difendere i tuoi tesori fruttati.
 
-#### **2. `encrypt()` - Turn Bananas into Gibberish**
+#### **2. `encrypt()` - Trasforma le Banane in Confusione**
 
-**What Happens Inside the Jungle:**
-1. Wrap your banana message with **`APESSTRONK`** and **`BANANA`**. 🍌💪
-2. Scramble letters like a confused chimp using byte rotations. 🙉
-3. Add random **banana sprinkles** for extra confusion. 🍌✨
-4. Pack everything together (IV, encrypted gibberish, and offsets).
-5. Spice it up with emojis and ape sayings like:
-   - **“OOOH OOOH!”**
-   - **“BANANA TIME!”**
-   - **“APE STRONK!”**
+**Cosa Succede nella Giungla:**  
+1. Avvolge il messaggio-banana con **`APESSTRONK`** e **`BANANA`**. 🍌💪  
+2. Mescola le lettere come una scimmia confusa usando rotazioni di byte. 🙉  
+3. Aggiunge spruzzi di **banana casuale** per ulteriore confusione. 🍌✨  
+4. Confeziona tutto insieme (IV, miscuglio crittografato e offset).  
+5. Aggiunge un tocco di emoji e frasi scimmiesche come:  
+   - **“OOOH OOOH!”**  
+   - **“È ORA DI BANANE!”**  
+   - **“SCIMMIE FORTI!”**
 
-**Result:** A ridiculous string that looks like a chimp threw emojis at it. 🙈
-
----
-
-#### **3. `decrypt()` - Bring the Bananas Back!**
-
-**What Happens Inside the Jungle:**
-1. Remove all the **ape nonsense** (emojis and sayings).
-2. Reverse the transformations (un-scramble the bytes).
-3. Strip off the **`APESSTRONK`** and **`BANANA`** wrapping.
-4. Voilà! Your bananas are back where they belong. 🍌🎉
+**Risultato:** Una stringa ridicola che sembra creata da una scimmia che ha tirato emoji ovunque. 🙈
 
 ---
 
-### 🔒 **How Secure is This Ape Magic?**
+#### **3. `decrypt()` - Riporta Indietro le Banane**
 
-**Short Answer:** Not very. 🙊
-
-**Why?**
-- It’s like using banana peels for locks—fun but easy to break.
-- Byte rotation and random offsets? A curious monkey could figure it out.
-- Hardcoded seed? Big ape no-no. Real apes use vaults! 🔐
+**Cosa Succede nella Giungla:**  
+1. Rimuove tutto il **nonsense scimmiesco** (emoji e frasi).  
+2. Inverte le trasformazioni (de-mescola i byte).  
+3. Toglie l’avvolgimento di **`APESSTRONK`** e **`BANANA`**.  
+4. Voilà! Le tue banane tornano al loro posto. 🍌🎉
 
 ---
 
-### 🍌 **King Kong’s Jungle Rules**
+### 🔒 **Quanto È Sicura Questa Magia Scimmiesca?**
 
-- **Encrypt:** Protect your bananas!
+**Risposta Breve:** Non molto. 🙊
+
+**Perché?**  
+- È come usare bucce di banana come serrature—divertente ma facile da scassinare.  
+- Rotazione di byte e offset casuali? Una scimmia curiosa potrebbe scoprirlo.  
+- Seme hardcoded? Grande errore scimmiesco. Le vere scimmie usano le casseforti! 🔐
+
+---
+
+### 🍌 **Regole della Giungla di King Kong**
+
+- **Crittografa:** Proteggi le tue banane!
   ```rust
-  let encrypted_message = encryptor.encrypt("YourSecretBananaMessage!");
+  let encrypted_message = encryptor.encrypt("IlTuoMessaggioSegretoBanana!");
   ```
-- **Decrypt:** Bring the bananas back!
+
+- **Decrittografa:** Riporta indietro le banane!
   ```rust
   let decrypted_message = encryptor.decrypt(&encrypted_message);
   ```
 
 ---
 
-### 🦍 **Main Jungle Playground**
+### 👑 **Parole Finali dal Re delle Scimmie**
 
-```rust
-fn main() {
-    let king_seed = "MIGHTY_RUST_APE_SEED"; // Sacred seed from Kong himself.
-    let encryptor = ApeBananaEncryptor::new(king_seed);
+"OOOH OOOH! Scimmie unite forti! Proteggete le vostre banane e diffondete la saggezza dell'ApeBananaEncryptor in tutta la giungla! SCIMMIE POTENTI!!!" 🦍🍌
 
-    let message = "ProtectTheShinyBananas!";
-    println!("Original Message: {}", message);
-
-    let encrypted_message = encryptor.encrypt(message);
-    println!("Encrypted Message: {}", encrypted_message);
-
-    let decrypted_message = encryptor.decrypt(&encrypted_message);
-    println!("Decrypted Message: {}", decrypted_message);
-}
-```
-
----
-
-### 🚨 **Ape Pro Tips** 
-
-1. **DO NOT** use this for real secrets. This is for ape giggles, not human security.
-2. Keep the **ape seed** safe. Without it, your bananas are lost forever. 🍌💔
-3. Add more emojis. Everything is better with 🍌 and 🦍.
-
----
-
-### 👑 **Final Words from King APE**
-
-"OOOH OOOH! Apes together strong! Protect your bananas and spread the wisdom of the ApeBananaEncryptor across the jungle! MIGHTY APES!!!" 🦍🍌
+--- 
