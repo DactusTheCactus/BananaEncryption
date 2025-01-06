@@ -130,6 +130,6 @@ fn main() {
 
 ---
 
-### 👑 **Final Words from King Kong**
+### 👑 **Final Words from King APE**
 
 "OOOH OOOH! Apes together strong! Protect your bananas and spread the wisdom of the ApeBananaEncryptor across the jungle! MIGHTY APES!!!" 🦍🍌
