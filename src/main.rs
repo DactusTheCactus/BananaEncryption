@@ -1,8 +1,8 @@
 // Importazione delle dipendenze necessarie
 use rand::{Rng, SeedableRng};      // Per la generazione di numeri casuali
 use rand_chacha::ChaCha20Rng;      // Implementazione specifica del generatore casuale
-use regex::Regex;                   // Per le operazioni con espressioni regolari
-use sha2::{Digest, Sha256};        // Per l'hashing SHA-256
+use regex::Regex;                   // Per le operazioni di regex
+use sha2::{Digest, Sha256};        // Per l'hashing SHA-256, controllo dell'integrità
 
 // Struttura principale dell'encryptor
 pub struct ApeBananaEncryptor {
