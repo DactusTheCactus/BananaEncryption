@@ -25,7 +25,7 @@ impl ApeBananaEncryptor {
         // Passo 1: Aggiunge un prefisso e suffisso al messaggio
         let mut transformed_message = format!("🦍APESSTRONK{}BANANA🍌", message);
 
-        // Passo 2: Cripta ogni byte del messaggio
+        // Passo 2: Cripta ogni byte del messaggio | Encrypted è il nostro messaggio banana
         let mut encrypted = Vec::new();
         for (i, &byte) in transformed_message.as_bytes().iter().enumerate() {
             // Rotazione del byte basata sulla posizione
@@ -147,4 +147,18 @@ impl ApeBananaEncryptor {
         seed.copy_from_slice(&result[..32]);
         seed
     }
+}
+
+fn main() {
+    let king_seed = "MIGHTY_RUST_APE_SEED";
+    let encryptor = ApeBananaEncryptor::new(king_seed);
+
+    let message = "TEst Messaggio ODIO CISCO";
+    println!("Original Message: {}", message);
+
+    let encrypted_message = encryptor.encrypt(message);
+    println!("Encrypted Message: {}", encrypted_message);
+
+    let decrypted_message = encryptor.decrypt(&encrypted_message);
+    println!("Decrypted Message: {}", decrypted_message);
 }
