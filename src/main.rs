@@ -23,7 +23,7 @@ impl ApeBananaEncryptor {
         let mut rng = ChaCha20Rng::from_seed(self.generate_seed());
 
         // Passo 1: Aggiunge un prefisso e suffisso al messaggio
-        let mut transformed_message = format!("🦍APESSTRONK{}BANANA🍌", message);
+        let transformed_message = format!("🦍APESSTRONK{}BANANA🍌", message);
 
         // Passo 2: Cripta ogni byte del messaggio | Encrypted è il nostro messaggio banana
         let mut encrypted = Vec::new();
